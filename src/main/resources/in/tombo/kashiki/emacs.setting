@@ -1,0 +1,48 @@
+backspace backspace
+delete delete
+enter return
+
+# allow setting.
+right forward
+left back
+down next
+up previous
+
+C-right y-roll-minus
+C-left y-roll-plus
+C-down x-roll-minus
+C-up x-roll-plus
+
+C-a head
+C-e last
+C-f forward
+C-b back
+C-n next
+C-p previous
+A-S-, buffer-head
+A-S-. buffer-last
+
+C-h backspace
+C-d delete
+C-m return
+C-space mark
+S-insert paste
+A-w copy
+C-k kill-ring
+C-w cut
+C-y paste
+
+C-home view-scale-up
+C-end view-scale-down
+C-S-; view-scale-up
+C-minus view-scale-down
+
+# buffer setting
+C-x C-s save-buffer
+C-x C-n new-buffer
+C-x C-b buffer-list
+C-x C-c exit-navy
+C-x C-f open-file
+C-x C-w save-file
+
+f5 view-reflesh
