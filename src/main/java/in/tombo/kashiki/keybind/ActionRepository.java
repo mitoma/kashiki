@@ -29,6 +29,8 @@ import in.tombo.kashiki.keybind.demo.XRollMinusAction;
 import in.tombo.kashiki.keybind.demo.XRollPlusAction;
 import in.tombo.kashiki.keybind.demo.YRollMinusAction;
 import in.tombo.kashiki.keybind.demo.YRollPlusAction;
+import in.tombo.kashiki.keybind.demo.ZRollMinusAction;
+import in.tombo.kashiki.keybind.demo.ZRollPlusAction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,7 +76,8 @@ public class ActionRepository {
     addAction(new XRollMinusAction());
     addAction(new YRollPlusAction());
     addAction(new YRollMinusAction());
-
+    addAction(new ZRollPlusAction());
+    addAction(new ZRollMinusAction());
   }
 
   public void addAction(Action action) {

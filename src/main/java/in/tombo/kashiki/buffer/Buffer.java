@@ -25,7 +25,7 @@ public class Buffer {
     observer.addListener(listener);
   }
 
-  public void update() {
+  private void update() {
     for (int i = 0; i < lines.size(); i++) {
       lines.get(i).updatePosition(i);
     }
