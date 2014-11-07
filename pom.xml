@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <properties>
-    <lib.jogl.version>2.2.1</lib.jogl.version>
+    <lib.jogl.version>2.2.4</lib.jogl.version>
     <lib.guava.version>18.0</lib.guava.version>
-    <lib.jgit.version>3.4.1.201406201815-r</lib.jgit.version>
+    <lib.jgit.version>3.5.1.201410131835-r</lib.jgit.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.version>0.0.1-SNAPSHOT</project.version>
   </properties>
