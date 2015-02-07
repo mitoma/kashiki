@@ -10,7 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>in.tombo</groupId>
   <artifactId>kashiki</artifactId>
-  <version>${project.version}</version>
+  <version>0.0.2-SNAPSHOT</version>
   <build>
     <plugins>
       <plugin>
@@ -44,7 +44,7 @@
           </descriptors>
         </configuration>
       </plugin>
-
+<!-- 
       <plugin>
         <groupId>com.akathist.maven.plugins.launch4j</groupId>
         <artifactId>launch4j-maven-plugin</artifactId>
@@ -84,6 +84,16 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+       -->
+      <plugin>
+        <groupId>com.zenjava</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>8.1.2</version>
+        <configuration>
+          <mainClass>in.tombo.kashiki.Kashiki</mainClass>
+          <vendor>Mitoma Ryo</vendor>
+        </configuration>
       </plugin>
     </plugins>
   </build>
