@@ -2,6 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <properties>
     <lib.jogl.version>2.2.4</lib.jogl.version>
+    <lib.guice.version>3.0</lib.guice.version>
     <lib.guava.version>18.0</lib.guava.version>
     <lib.jgit.version>3.5.1.201410131835-r</lib.jgit.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -107,6 +108,11 @@
       <groupId>org.jogamp.gluegen</groupId>
       <artifactId>gluegen-rt-main</artifactId>
       <version>${lib.jogl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>${lib.guice.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
