@@ -11,4 +11,6 @@ public interface BufferListener {
   public void removeLine(BufferLine bufferLine);
 
   public void moveChar(BufferLine fromLine, BufferLine toLine, BufferChar c);
+
+  public void setMark(Caret caret);
 }

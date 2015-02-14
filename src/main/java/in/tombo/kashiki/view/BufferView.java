@@ -18,6 +18,7 @@ public class BufferView extends Base implements BufferListener {
 
   private Buffer document;
   private CaretView caret;
+  private CaretView mark;
   private List<LineView> lines = new ArrayList<>();
   private SmoothValue width = new SmoothValue();
   private SmoothValue height = new SmoothValue();
@@ -25,6 +26,7 @@ public class BufferView extends Base implements BufferListener {
   public BufferView(Buffer buffer) {
     this.document = buffer;
     this.caret = new CaretView(buffer.getCaret());
+    this.mark = new CaretView(buffer.getMark());
     getColor().update(0.5, 0.5, 0.5, 0.5);
     buffer.addListener(this);
     buildLines();
@@ -82,6 +84,7 @@ public class BufferView extends Base implements BufferListener {
     }
 
     updateCaret(document.getCaret());
+    mark.draw(gl);
     caret.draw(gl);
   }
 
@@ -162,6 +165,30 @@ public class BufferView extends Base implements BufferListener {
       lv.getPosition().getY().setValue(h);
       h -= lv.getHeight();
     }
+  }
+
+  @Override
+  public void setMark(Caret c) {
+    if (mark == null) {
+      mark = new CaretView(c);
+    }
+
+    LineView lv = lines.get(c.getRow());
+    List<CharView> cvl = lv.getChars();
+
+    double x;
+    if (document.isLineHead()) {
+      x =
+          lv.getChars().stream().mapToDouble(cv -> cv.getWidth() / 2).findFirst()
+              .orElse(caret.getWidth() / 2);
+    } else if (document.isLineLast()) {
+      x = lv.getWidth() + (caret.getWidth() / 2);
+    } else {
+      x = cvl.get(c.getCol()).getPosition().getX().getLastValue();
+    }
+    double y = -lv.getPosition().getY().getLastValue();
+
+    mark.updatePosition(x, y);
   }
 
 }

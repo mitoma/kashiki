@@ -113,6 +113,10 @@ public class Buffer {
     return currentCaret;
   }
 
+  public Caret getMark() {
+    return mark;
+  }
+
   public void backspace() {
     if (isBufferHead() && isLineHead()) {
       return;
@@ -228,6 +232,7 @@ public class Buffer {
   public void mark() {
     mark.setCol(currentCaret.getCol());
     mark.setRow(currentCaret.getRow());
+    observer.setMark(mark);
   }
 
   public String copy() {

@@ -35,4 +35,9 @@ public class BufferObserver implements BufferListener {
     listeners.forEach((l) -> l.moveChar(fromLine, toLine, c));
   }
 
+  @Override
+  public void setMark(Caret caret) {
+    listeners.forEach((l) -> l.setMark(caret));
+  }
+
 }
