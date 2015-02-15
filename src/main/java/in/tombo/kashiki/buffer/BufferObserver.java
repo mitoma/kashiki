@@ -40,4 +40,9 @@ public class BufferObserver implements BufferListener {
     listeners.forEach((l) -> l.setMark(caret));
   }
 
+  @Override
+  public void sendMessage(String string) {
+    listeners.forEach((l) -> l.sendMessage(string));
+  }
+
 }

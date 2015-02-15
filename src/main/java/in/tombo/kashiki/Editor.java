@@ -76,6 +76,10 @@ public class Editor implements KashikiKeyListener {
 
   public void createNewBuffer() {
     Buffer buf = new Buffer("scratch-" + System.currentTimeMillis(), "");
+    setBuffer(buf);
+  }
+
+  public void setBuffer(Buffer buf) {
     buffers.add(buf);
     currentBuffer = buf;
     currentDrawables.clear();

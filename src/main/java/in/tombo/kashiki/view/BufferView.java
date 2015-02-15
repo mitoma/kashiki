@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.media.opengl.GL2;
 
@@ -20,6 +21,7 @@ public class BufferView extends Base implements BufferListener {
   private CaretView caret;
   private CaretView mark;
   private List<LineView> lines = new ArrayList<>();
+  private List<LineView> messages = new ArrayList<>();
   private SmoothValue width = new SmoothValue();
   private SmoothValue height = new SmoothValue();
 
@@ -27,7 +29,8 @@ public class BufferView extends Base implements BufferListener {
     this.document = buffer;
     this.caret = new CaretView(buffer.getCaret());
     this.mark = new CaretView(buffer.getMark());
-    getColor().update(0.5, 0.5, 0.5, 0.5);
+    mark.getColor().update(SolarizedColor.GREEN, 0.5);
+    getColor().update(SolarizedColor.BASE02);
     buffer.addListener(this);
     buildLines();
   }
@@ -86,6 +89,18 @@ public class BufferView extends Base implements BufferListener {
     updateCaret(document.getCaret());
     mark.draw(gl);
     caret.draw(gl);
+
+
+    List<LineView> removedMessages = new ArrayList<LineView>();
+    for (LineView message : messages) {
+      System.out.println("drawHoge");
+      message.getPosition().update(0, 0, 0);
+      message.draw(gl);
+      // if (!message.isAnimated()) {
+      // removedMessages.add(message);
+      // }
+    }
+    // messages = removedMessages;
   }
 
   @Override
@@ -191,4 +206,12 @@ public class BufferView extends Base implements BufferListener {
     mark.updatePosition(x, y);
   }
 
+  @Override
+  public void sendMessage(String string) {
+    BufferLine bl = new BufferLine();
+    AtomicInteger counter = new AtomicInteger(-1);
+    string.codePoints().forEach(
+        c -> bl.insertChar(counter.incrementAndGet(), new String(Character.toChars(c))));
+    messages.add(new LineView(bl));
+  }
 }

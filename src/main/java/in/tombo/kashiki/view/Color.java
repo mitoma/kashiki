@@ -3,9 +3,9 @@ package in.tombo.kashiki.view;
 import javax.media.opengl.GL2;
 
 public class Color {
-  private SmoothValue red = new SmoothValue(1);
-  private SmoothValue green = new SmoothValue(1);
-  private SmoothValue blue = new SmoothValue(1);
+  private SmoothValue red = new SmoothValue(SolarizedColor.BASE0.getR());
+  private SmoothValue green = new SmoothValue(SolarizedColor.BASE0.getG());
+  private SmoothValue blue = new SmoothValue(SolarizedColor.BASE0.getB());
   private SmoothValue alpha = new SmoothValue(1);
 
   public SmoothValue getRed() {
@@ -48,7 +48,15 @@ public class Color {
     gl.glColor4d(red.getValue(), green.getValue(), blue.getValue(), alpha.getValue());
   }
 
-  public void update(double red, double blue, double green, double alpha) {
+  public void update(SolarizedColor color) {
+    update(color, 1.0);
+  }
+
+  public void update(SolarizedColor color, double alpha) {
+    update(color.getR(), color.getB(), color.getG(), alpha);
+  }
+
+  private void update(double red, double blue, double green, double alpha) {
     this.red.setValue(red);
     this.blue.setValue(blue);
     this.green.setValue(green);
@@ -61,4 +69,5 @@ public class Color {
     this.green.setValueWithoutSmooth(green);
     this.alpha.setValueWithoutSmooth(alpha);
   }
+
 }

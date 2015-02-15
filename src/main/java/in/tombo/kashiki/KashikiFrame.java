@@ -1,6 +1,7 @@
 package in.tombo.kashiki;
 
 import in.tombo.kashiki.view.Base;
+import in.tombo.kashiki.view.SolarizedColor;
 
 import java.io.IOException;
 
@@ -55,6 +56,9 @@ public class KashikiFrame implements GLEventListener {
 
   private void render(GLAutoDrawable drawable) throws GLException, IOException {
     GL2 gl = drawable.getGL().getGL2();
+
+    SolarizedColor col = SolarizedColor.BASE03;
+    gl.glClearColor((float) col.getR(), (float) col.getG(), (float) col.getB(), (float) 0.5);
 
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 

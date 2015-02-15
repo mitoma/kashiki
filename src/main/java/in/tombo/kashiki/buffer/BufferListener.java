@@ -13,4 +13,6 @@ public interface BufferListener {
   public void moveChar(BufferLine fromLine, BufferLine toLine, BufferChar c);
 
   public void setMark(Caret caret);
+
+  public void sendMessage(String string);
 }

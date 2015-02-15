@@ -13,6 +13,9 @@ public class CaretView extends Base {
   private Caret caret;
 
   public CaretView(Caret caret) {
+    this.getColor().update(SolarizedColor.BLUE);
+    this.getColor().getAlpha().setValue(0.75);
+
     this.caret = caret;
     this.textureProvider = TextureProvider.getInstance();
   }
@@ -35,7 +38,9 @@ public class CaretView extends Base {
     Texture texture = textureProvider.getTexture(gl, "◆");
     texture.enable(gl);
     texture.bind(gl);
-    gl.glColor4d(0.4, 0.4, 1, 0.5);
+    Color color = getColor();
+    gl.glColor4d(color.getRed().getValue(), color.getGreen().getValue(),
+        color.getBlue().getValue(), color.getAlpha().getValue());
 
     gl.glRotated((System.currentTimeMillis() / 5) % 360, 0, 1, 0);
 
