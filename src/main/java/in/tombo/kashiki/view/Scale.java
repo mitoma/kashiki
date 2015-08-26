@@ -1,6 +1,6 @@
 package in.tombo.kashiki.view;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 public class Scale {
   private SmoothValue x = new SmoothValue(1);

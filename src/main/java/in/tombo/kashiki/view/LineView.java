@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 public class LineView extends Base implements BufferLineListener, Comparable<LineView> {
 

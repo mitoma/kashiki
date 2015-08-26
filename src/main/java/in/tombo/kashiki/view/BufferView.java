@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 public class BufferView extends Base implements BufferListener {
 

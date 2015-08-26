@@ -11,11 +11,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-import javax.media.opengl.GL2;
-
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
 

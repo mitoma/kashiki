@@ -3,8 +3,7 @@ package in.tombo.kashiki.view;
 import in.tombo.kashiki.buffer.BufferChar;
 import in.tombo.kashiki.buffer.BufferCharListener;
 
-import javax.media.opengl.GL2;
-
+import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.texture.Texture;
 
 public class CharView extends Base implements BufferCharListener, Comparable<CharView> {
