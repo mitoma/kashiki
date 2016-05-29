@@ -32,6 +32,33 @@ public enum MovingType {
       return result;
     }
   },
+  SMOOTH_OUT {
+    @Override
+    protected double[] innerGains(int divOfNum) {
+      double[] result = new double[divOfNum];
+      double gain = 1.0 / divOfNum;
+      double g = Math.PI * gain / 2.0;
+      for (int i = 0; i < divOfNum; i++) {
+        double divGain = Math.sin(g * (i + 1)) - Math.sin(g * i);
+        result[i] = (divGain);
+      }
+      return result;
+    }
+  },
+  SMOOTH_IN {
+    @Override
+    protected double[] innerGains(int divOfNum) {
+      double[] result = new double[divOfNum];
+      double gain = 1.0 / divOfNum;
+      double g = Math.PI * gain / 2.0;
+      double start = Math.PI * 1.5;
+      for (int i = 0; i < divOfNum; i++) {
+        double divGain = Math.sin(start + (g * (i + 1))) - Math.sin(start + (g * i));
+        result[i] = (divGain);
+      }
+      return result;
+    }
+  },
   BOUND {
     @Override
     protected double[] innerGains(int divOfNum) {
@@ -48,8 +75,8 @@ public enum MovingType {
     }
   };
 
-  LoadingCache<Integer, double[]> cache = CacheBuilder.newBuilder().maximumSize(1000)
-      .build(new CacheLoader<Integer, double[]>() {
+  LoadingCache<Integer, double[]> cache =
+      CacheBuilder.newBuilder().maximumSize(1000).build(new CacheLoader<Integer, double[]>() {
         @Override
         public double[] load(Integer divOfNum) throws Exception {
           return innerGains(divOfNum);
