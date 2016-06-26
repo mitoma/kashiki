@@ -25,5 +25,7 @@ public class Kashiki {
     frame.add(new KashikiGLCanvas());
 
     frame.setVisible(true);
+    Editor.getInstance().setFrame(frame);
+    
   }
 }
