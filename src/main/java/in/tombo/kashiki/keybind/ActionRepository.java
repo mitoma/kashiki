@@ -9,6 +9,7 @@ import in.tombo.kashiki.keybind.basic.CutAction;
 import in.tombo.kashiki.keybind.basic.DeleteAction;
 import in.tombo.kashiki.keybind.basic.ExitNavyAction;
 import in.tombo.kashiki.keybind.basic.ForwardAction;
+import in.tombo.kashiki.keybind.basic.FullScreenAction;
 import in.tombo.kashiki.keybind.basic.HeadAction;
 import in.tombo.kashiki.keybind.basic.KillRingAction;
 import in.tombo.kashiki.keybind.basic.LastAction;
@@ -78,6 +79,8 @@ public class ActionRepository {
     addAction(new YRollMinusAction());
     addAction(new ZRollPlusAction());
     addAction(new ZRollMinusAction());
+
+    addAction(new FullScreenAction());
   }
 
   public void addAction(Action action) {

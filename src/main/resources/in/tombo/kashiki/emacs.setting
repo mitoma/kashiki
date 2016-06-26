@@ -48,3 +48,4 @@ C-x C-f open-file
 C-x C-w save-file
 
 f5 view-reflesh
+f11 full-screen

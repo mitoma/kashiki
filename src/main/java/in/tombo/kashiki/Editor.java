@@ -1,5 +1,11 @@
 package in.tombo.kashiki;
 
+import java.awt.Frame;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.util.ArrayList;
+import java.util.List;
+
 import in.tombo.kashiki.buffer.Buffer;
 import in.tombo.kashiki.buffer.BufferRepository;
 import in.tombo.kashiki.keybind.ActionRepository;
@@ -9,9 +15,6 @@ import in.tombo.kashiki.keybind.SupportKey;
 import in.tombo.kashiki.view.Base;
 import in.tombo.kashiki.view.BufferView;
 import in.tombo.kashiki.view.SmoothValue;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Editor implements KashikiKeyListener {
 
@@ -25,6 +28,7 @@ public class Editor implements KashikiKeyListener {
   private ActionRepository actionRepository;
   private KashikiKeyListener keyListener;
   private SmoothValue scale = new SmoothValue(1);
+  private Frame frame;
 
   private Editor() {
     Buffer buf = new BufferRepository().loadBuffer("scratch");
@@ -90,5 +94,21 @@ public class Editor implements KashikiKeyListener {
 
   public void tearDown() {
     // FIXME
+  }
+
+  public void toggleFullScreen() {
+    GraphicsDevice screenDevice =
+        GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    if (screenDevice.isFullScreenSupported()) {
+      if (screenDevice.getFullScreenWindow() != null) {
+        screenDevice.setFullScreenWindow(null);
+      } else {
+        screenDevice.setFullScreenWindow(frame);
+      }
+    }
+  }
+
+  public void setFrame(Frame frame) {
+    this.frame = frame;
   }
 }
