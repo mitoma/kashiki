@@ -1,7 +1,5 @@
 package in.tombo.kashiki;
 
-import in.tombo.kashiki.view.Base;
-
 import java.io.IOException;
 
 import com.jogamp.opengl.GL;
@@ -72,9 +70,7 @@ public class KashikiFrame implements GLEventListener {
     gl.glScaled(s, s / yscale, 1.0);
     gl.glTranslated(0, 0, -10);
 
-    for (Base base : editor.getDrawables()) {
-      base.draw(gl);
-    }
+    editor.getDrawables().forEach(base->base.draw(gl));
 
     gl.glPopMatrix();
 
