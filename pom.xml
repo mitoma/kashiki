@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <properties>
+	<lib.lwjgl.version>3.1.3</lib.lwjgl.version>
     <lib.jogl.version>2.3.2</lib.jogl.version>
     <lib.guava.version>19.0</lib.guava.version>
     <lib.jgit.version>4.3.1.201605051710-r</lib.jgit.version>
@@ -98,6 +99,47 @@
     </plugins>
   </build>
   <dependencies>
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl</artifactId>
+      <version>${lib.lwjgl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl</artifactId>
+      <version>${lib.lwjgl.version}</version>
+      <classifier>natives-windows</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl-glfw</artifactId>
+      <version>${lib.lwjgl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl-glfw</artifactId>
+      <version>${lib.lwjgl.version}</version>
+      <classifier>natives-windows</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl-opengl</artifactId>
+      <version>${lib.lwjgl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl-opengl</artifactId>
+      <version>${lib.lwjgl.version}</version>
+      <classifier>natives-windows</classifier>
+    </dependency>
+    <!-- 
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl-platform</artifactId>
+      <version>${lib.lwjgl.version}</version>
+      <classifier>natives-windows</classifier>
+    </dependency>
+     -->
     <dependency>
       <groupId>org.jogamp.jogl</groupId>
       <artifactId>jogl-all-main</artifactId>

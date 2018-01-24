@@ -7,9 +7,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWErrorCallback;
+
 public class Kashiki {
 
   public static void main(String[] args) throws IOException {
+    GLFWErrorCallback.createPrint(System.err).set();
+    if(!GLFW.glfwInit()) {
+      throw new IllegalStateException("Unable to initialize GLFW");
+    }
+    
     Frame frame = new Frame("Kashiki");
     frame.setIconImage(ImageIO.read(Thread.currentThread().getContextClassLoader()
         .getResourceAsStream("in/tombo/kashiki/icon.png")));
