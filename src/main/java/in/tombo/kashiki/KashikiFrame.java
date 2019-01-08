@@ -70,7 +70,7 @@ public class KashikiFrame implements GLEventListener {
     gl.glScaled(s, s / yscale, 1.0);
     gl.glTranslated(0, 0, -10);
 
-    editor.getDrawables().forEach(base->base.draw(gl));
+    editor.getDrawables().forEach(base -> base.draw(gl));
 
     gl.glPopMatrix();
 
