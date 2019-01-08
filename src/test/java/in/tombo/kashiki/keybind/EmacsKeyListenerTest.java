@@ -30,7 +30,7 @@ public class EmacsKeyListenerTest {
 
   @Test
   public void testKeyPressed() {
-    listener.keyPressed(SupportKey.CTRL, KeyEvent.VK_Q, System.currentTimeMillis());
+    listener.keyPressed(null, SupportKey.CTRL, KeyEvent.VK_Q, System.currentTimeMillis());
   }
 
 }

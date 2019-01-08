@@ -7,10 +7,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import in.tombo.kashiki.keybind.ActionRepository;
+import in.tombo.kashiki.keybind.EmacsKeyListener;
+
 public class Kashiki {
 
   public static void main(String[] args) throws IOException {
     Frame frame = new Frame("Kashiki");
+
+    Editor editor = new Editor(new ActionRepository(), new EmacsKeyListener(), frame);
+
     frame.setIconImage(ImageIO.read(Thread.currentThread().getContextClassLoader()
         .getResourceAsStream("in/tombo/kashiki/icon.png")));
 
@@ -22,10 +28,8 @@ public class Kashiki {
 
     frame.setSize(800, 600);
     frame.setLocation(100, 100);
-    frame.add(new KashikiGLCanvas());
+    frame.add(new KashikiGLCanvas(editor));
 
     frame.setVisible(true);
-    Editor.getInstance().setFrame(frame);
-
   }
 }

@@ -11,8 +11,8 @@ public class ViewRefleshAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().reflesh();
+  public void execute(Editor editor, String... args) {
+    editor.reflesh();
   }
 
 }

@@ -11,8 +11,8 @@ public class SaveAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().save();
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().save();
   }
 
 }

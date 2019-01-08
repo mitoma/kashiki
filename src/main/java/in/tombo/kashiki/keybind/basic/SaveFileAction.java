@@ -20,13 +20,13 @@ public class SaveFileAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
+  public void execute(Editor editor, String... args) {
     JFileChooser fileChooser = new JFileChooser();
     int selected = fileChooser.showSaveDialog(null);
     if (selected == JFileChooser.APPROVE_OPTION) {
       try (OutputStreamWriter writer = new OutputStreamWriter(
           new FileOutputStream(fileChooser.getSelectedFile()), Charsets.UTF_8);) {
-        Editor.getInstance().getCurrentBuffer().getLines().forEach(l -> {
+        editor.getCurrentBuffer().getLines().forEach(l -> {
           try {
             writer.append(l.toLineString());
             writer.append("\n");

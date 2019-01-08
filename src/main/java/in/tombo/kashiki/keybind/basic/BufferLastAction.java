@@ -11,8 +11,8 @@ public class BufferLastAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().bufferLast();
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().bufferLast();
   }
 
 }

@@ -10,7 +10,11 @@ import javax.swing.SwingUtilities;
 
 public class DocumentKeyListener implements KeyListener {
 
-  private Editor editor = Editor.getInstance();
+  private final Editor editor;
+
+  public DocumentKeyListener(Editor editor) {
+    this.editor = editor;
+  }
 
   @Override
   public void keyPressed(KeyEvent e) {

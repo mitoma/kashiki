@@ -11,8 +11,8 @@ public class BackAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().back();
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().back();
   }
 
 }
