@@ -40,7 +40,7 @@ public class BufferRepository {
     Buffer buffer = new Buffer(name, "");
     File bufferFile = new File(repositoryPath + "/" + name);
     if (!bufferFile.exists()) {
-      if (buffer.bufferName.equals("scratch")) {
+      if (buffer.getBufferName().equals("scratch")) {
         InputStream helpSource = Thread.currentThread().getContextClassLoader()
             .getResourceAsStream("in/tombo/kashiki/help.text");
         BufferedReader reader =
@@ -74,15 +74,15 @@ public class BufferRepository {
       if (diffs.size() == 0) {
         return;
       }
-      git.add().addFilepattern(buffer.bufferName).call();
-      git.commit().setMessage("udpate " + buffer.bufferName).call();
+      git.add().addFilepattern(buffer.getBufferName()).call();
+      git.commit().setMessage("udpate " + buffer.getBufferName()).call();
     } catch (GitAPIException e) {
       e.printStackTrace();
     }
   }
 
   private File saveToFile(Buffer buffer) {
-    File file = new File(repositoryPath + "/" + buffer.bufferName);
+    File file = new File(repositoryPath + "/" + buffer.getBufferName());
     if (!file.exists()) {
       try {
         file.createNewFile();
@@ -92,7 +92,7 @@ public class BufferRepository {
     }
 
     try (BufferedWriter writer = Files.newWriter(file, Charset.forName("UTF-8"));) {
-      buffer.lines.forEach((l) -> {
+      buffer.getLines().forEach((l) -> {
         try {
           writer.append(l.toLineString());
           writer.newLine();

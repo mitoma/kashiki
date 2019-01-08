@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Buffer {
-  String bufferName;
-  Caret currentCaret = new Caret(0, 0);
-  Caret mark = new Caret(0, 0);
-  LinkedList<BufferLine> lines = new LinkedList<BufferLine>();
-  BufferObserver observer = new BufferObserver();
+
+  private String bufferName;
+
+  private Caret currentCaret = new Caret(0, 0);
+  private Caret mark = new Caret(0, 0);
+  private LinkedList<BufferLine> lines = new LinkedList<BufferLine>();
+  private BufferObserver observer = new BufferObserver();
 
   public Buffer(String bufferName, String value) {
     this.bufferName = bufferName;
@@ -19,6 +21,10 @@ public class Buffer {
     observer.addLine(bl);
     update();
     insertString(value);
+  }
+
+  public String getBufferName() {
+    return bufferName;
   }
 
   public void addListener(BufferListener listener) {
