@@ -24,9 +24,8 @@ public class SaveFileAction implements Action {
     JFileChooser fileChooser = new JFileChooser();
     int selected = fileChooser.showSaveDialog(null);
     if (selected == JFileChooser.APPROVE_OPTION) {
-      try (OutputStreamWriter writer =
-          new OutputStreamWriter(new FileOutputStream(fileChooser.getSelectedFile()),
-              Charsets.UTF_8);) {
+      try (OutputStreamWriter writer = new OutputStreamWriter(
+          new FileOutputStream(fileChooser.getSelectedFile()), Charsets.UTF_8);) {
         Editor.getInstance().getCurrentBuffer().getLines().forEach(l -> {
           try {
             writer.append(l.toLineString());

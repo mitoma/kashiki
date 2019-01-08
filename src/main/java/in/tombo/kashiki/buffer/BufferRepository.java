@@ -41,9 +41,8 @@ public class BufferRepository {
     File bufferFile = new File(repositoryPath + "/" + name);
     if (!bufferFile.exists()) {
       if (buffer.bufferName.equals("scratch")) {
-        InputStream helpSource =
-            Thread.currentThread().getContextClassLoader()
-                .getResourceAsStream("in/tombo/kashiki/help.text");
+        InputStream helpSource = Thread.currentThread().getContextClassLoader()
+            .getResourceAsStream("in/tombo/kashiki/help.text");
         BufferedReader reader =
             new BufferedReader(new InputStreamReader(helpSource, Charsets.UTF_8));
         reader.lines().forEach(l -> {

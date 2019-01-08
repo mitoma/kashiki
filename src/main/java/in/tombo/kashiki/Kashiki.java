@@ -26,6 +26,6 @@ public class Kashiki {
 
     frame.setVisible(true);
     Editor.getInstance().setFrame(frame);
-    
+
   }
 }

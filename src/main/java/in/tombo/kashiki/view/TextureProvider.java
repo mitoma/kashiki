@@ -21,15 +21,15 @@ import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
 public class TextureProvider {
   private int FONT_SIZE = 64;
 
-  private LoadingCache<String, Texture> textureCache = CacheBuilder.newBuilder().maximumSize(10000)
-      .build(new CacheLoader<String, Texture>() {
+  private LoadingCache<String, Texture> textureCache =
+      CacheBuilder.newBuilder().maximumSize(10000).build(new CacheLoader<String, Texture>() {
         @Override
         public Texture load(String c) throws Exception {
           return AWTTextureIO.newTexture(gl.getGLProfile(), getTexture(c, FONT_SIZE), true);
         }
       });
-  private LoadingCache<String, Double> sizeCache = CacheBuilder.newBuilder().maximumSize(10000)
-      .build(new CacheLoader<String, Double>() {
+  private LoadingCache<String, Double> sizeCache =
+      CacheBuilder.newBuilder().maximumSize(10000).build(new CacheLoader<String, Double>() {
 
         @Override
         public Double load(String c) throws Exception {
@@ -52,10 +52,10 @@ public class TextureProvider {
 
   private TextureProvider() {
     try {
-      font =
-          Font.createFont(Font.PLAIN,
-              this.getClass().getClassLoader().getResourceAsStream("TakaoMincho.ttf")).deriveFont(
-              (float) FONT_SIZE);
+      font = Font
+          .createFont(Font.PLAIN,
+              this.getClass().getClassLoader().getResourceAsStream("TakaoMincho.ttf"))
+          .deriveFont((float) FONT_SIZE);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }

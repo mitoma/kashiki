@@ -38,8 +38,8 @@ public class Buffer {
     if (values.length == 0) {
       insertEnter();
     } else if (values.length == 1) {
-      values[0].codePoints().forEach(
-          codePoint -> insertChar(new String(Character.toChars(codePoint))));
+      values[0].codePoints()
+          .forEach(codePoint -> insertChar(new String(Character.toChars(codePoint))));
     } else {
       Arrays.stream(values).forEach(v -> {
         v.codePoints().forEach(codePoint -> insertChar(new String(Character.toChars(codePoint))));
