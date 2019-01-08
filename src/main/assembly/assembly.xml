@@ -20,7 +20,7 @@
     </fileSet>
     <fileSet>
       <directory>${project.basedir}</directory>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory></outputDirectory>
       <includes>
         <include>README*</include>
         <include>LICENSE</include>
@@ -29,7 +29,7 @@
     </fileSet>
     <fileSet>
       <directory>${project.basedir}/src/main/doc/lib-licences</directory>
-      <outputDirectory>/lib-licences</outputDirectory>
+      <outputDirectory>lib-licences</outputDirectory>
     </fileSet>
     <fileSet>
       <directory>${project.build.directory}/site</directory>
@@ -37,7 +37,7 @@
     </fileSet>
     <fileSet>
       <directory>${project.basedir}/src/main/bin</directory>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory></outputDirectory>
       <filtered>true</filtered>
       <fileMode>0755</fileMode>
       <includes>
