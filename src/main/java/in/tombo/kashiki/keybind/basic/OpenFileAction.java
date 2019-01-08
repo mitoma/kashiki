@@ -27,7 +27,8 @@ public class OpenFileAction implements Action {
 
     if (selected == JFileChooser.APPROVE_OPTION) {
       try {
-        String textString = Files.toString(fileChooser.getSelectedFile(), Charsets.UTF_8);
+        String textString =
+            Files.asCharSource(fileChooser.getSelectedFile(), Charsets.UTF_8).read();
         Editor.getInstance().createNewBuffer();
         Editor.getInstance().getCurrentBuffer().insertString(textString);
       } catch (IOException e) {
