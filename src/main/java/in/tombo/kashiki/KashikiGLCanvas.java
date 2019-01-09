@@ -9,13 +9,13 @@ public class KashikiGLCanvas extends GLCanvas {
 
   private static final long serialVersionUID = 1L;
 
-  public KashikiGLCanvas() {
+  public KashikiGLCanvas(Editor editor) {
     super(new GLCapabilities(GLProfile.getDefault()));
     setFocusable(true);
     setFocusTraversalKeysEnabled(false);
-    addKeyListener(new DocumentKeyListener());
+    addKeyListener(new DocumentKeyListener(editor));
     addKeyListener(new LoggingKeyListener());
-    addGLEventListener(new KashikiFrame());
+    addGLEventListener(new KashikiFrame(editor));
     new FPSAnimator(this, 30).start();
   }
 }

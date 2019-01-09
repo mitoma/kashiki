@@ -11,8 +11,8 @@ public class ForwardAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().forward();
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().forward();
   }
 
 }

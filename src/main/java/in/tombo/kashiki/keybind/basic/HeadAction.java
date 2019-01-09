@@ -11,8 +11,8 @@ public class HeadAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().head();
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().head();
   }
 
 }

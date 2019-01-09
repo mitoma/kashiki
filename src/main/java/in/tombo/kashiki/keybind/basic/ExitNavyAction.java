@@ -11,8 +11,8 @@ public class ExitNavyAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().tearDown();
+  public void execute(Editor editor, String... args) {
+    editor.tearDown();
     System.exit(0);
   }
 }

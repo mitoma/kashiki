@@ -11,8 +11,8 @@ public class BufferHeadAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().bufferHead();
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().bufferHead();
   }
 
 }

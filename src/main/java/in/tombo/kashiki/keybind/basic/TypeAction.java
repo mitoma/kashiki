@@ -11,9 +11,9 @@ public class TypeAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
+  public void execute(Editor editor, String... args) {
     for (String string : args) {
-      Editor.getInstance().getCurrentBuffer().insertString(string);
+      editor.getCurrentBuffer().insertString(string);
     }
   }
 

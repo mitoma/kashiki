@@ -1,5 +1,9 @@
 package in.tombo.kashiki.keybind;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import in.tombo.kashiki.Editor;
 import in.tombo.kashiki.keybind.basic.BackAction;
 import in.tombo.kashiki.keybind.basic.BackspaceAction;
 import in.tombo.kashiki.keybind.basic.BufferHeadAction;
@@ -32,9 +36,6 @@ import in.tombo.kashiki.keybind.demo.YRollMinusAction;
 import in.tombo.kashiki.keybind.demo.YRollPlusAction;
 import in.tombo.kashiki.keybind.demo.ZRollMinusAction;
 import in.tombo.kashiki.keybind.demo.ZRollPlusAction;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ActionRepository {
 
@@ -87,11 +88,11 @@ public class ActionRepository {
     actionMap.put(action.name(), action);
   }
 
-  public void executeAction(String name, String... args) {
+  public void executeAction(Editor editor, String name, String... args) {
     if (!actionMap.containsKey(name)) {
       System.err.println("Unregistered action [" + name + "]");
       return;
     }
-    actionMap.get(name).execute(args);
+    actionMap.get(name).execute(editor, args);
   }
 }

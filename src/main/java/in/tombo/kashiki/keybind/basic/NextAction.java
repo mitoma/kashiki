@@ -11,8 +11,8 @@ public class NextAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().next();
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().next();
   }
 
 }

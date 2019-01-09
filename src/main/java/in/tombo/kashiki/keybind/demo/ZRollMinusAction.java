@@ -14,8 +14,8 @@ public class ZRollMinusAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    List<Base> drawables = Editor.getInstance().getDrawables();
+  public void execute(Editor editor, String... args) {
+    List<Base> drawables = editor.getDrawables();
     for (Base base : drawables) {
       base.getAngle().getZ().addValue(-10);
     }

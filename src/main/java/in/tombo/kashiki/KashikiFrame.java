@@ -11,12 +11,16 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 public class KashikiFrame implements GLEventListener {
 
-  Editor editor = Editor.getInstance();
-  FPSAnimator animator;
+  private final Editor editor;
+  private FPSAnimator animator;
 
   int canvasWidth = 0;
   int canvasHeight = 0;
   double yscale;
+
+  public KashikiFrame(Editor editor) {
+    this.editor = editor;
+  }
 
   @Override
   public void display(GLAutoDrawable drawable) {

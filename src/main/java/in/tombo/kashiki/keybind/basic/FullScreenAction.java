@@ -11,8 +11,8 @@ public class FullScreenAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().toggleFullScreen();
+  public void execute(Editor editor, String... args) {
+    editor.toggleFullScreen();
   }
 
 }

@@ -15,8 +15,8 @@ public class CopyAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    setClipboardString(Editor.getInstance().getCurrentBuffer().copy());
+  public void execute(Editor editor, String... args) {
+    setClipboardString(editor.getCurrentBuffer().copy());
   }
 
   private void setClipboardString(String value) {

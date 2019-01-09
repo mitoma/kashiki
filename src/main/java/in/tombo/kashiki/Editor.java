@@ -9,17 +9,13 @@ import java.util.List;
 import in.tombo.kashiki.buffer.Buffer;
 import in.tombo.kashiki.buffer.BufferRepository;
 import in.tombo.kashiki.keybind.ActionRepository;
-import in.tombo.kashiki.keybind.EmacsKeyListener;
 import in.tombo.kashiki.keybind.KashikiKeyListener;
 import in.tombo.kashiki.keybind.SupportKey;
 import in.tombo.kashiki.view.Base;
 import in.tombo.kashiki.view.BufferView;
 import in.tombo.kashiki.view.SmoothValue;
 
-public class Editor implements KashikiKeyListener {
-
-  private static boolean INITIALIZED = false;
-  private static Editor INSTANCE = new Editor();
+public class Editor {
 
   private Buffer currentBuffer;
   private List<Buffer> buffers = new ArrayList<>();
@@ -30,7 +26,11 @@ public class Editor implements KashikiKeyListener {
   private SmoothValue scale = new SmoothValue(1);
   private Frame frame;
 
-  private Editor() {
+  public Editor(ActionRepository actionRepository, KashikiKeyListener keyListener, Frame frame) {
+    this.actionRepository = actionRepository;
+    this.keyListener = keyListener;
+    this.frame = frame;
+
     Buffer buf = new BufferRepository().loadBuffer("scratch");
     buffers.add(buf);
     currentBuffer = buf;
@@ -39,31 +39,20 @@ public class Editor implements KashikiKeyListener {
     currentDrawables.add(bufView);
   }
 
-  public static Editor getInstance() {
-    if (!INITIALIZED) {
-      INSTANCE.actionRepository = new ActionRepository();
-      INSTANCE.keyListener = new EmacsKeyListener();
-      INITIALIZED = true;
-    }
-    return INSTANCE;
-  }
-
   private KashikiKeyListener currentListener() {
     return keyListener;
   }
 
-  @Override
   public boolean keyPressed(SupportKey supportKey, int keyCode, long when) {
-    return currentListener().keyPressed(supportKey, keyCode, when);
+    return currentListener().keyPressed(this, supportKey, keyCode, when);
   }
 
-  @Override
   public boolean keyTyped(char typedString, long when) {
-    return currentListener().keyTyped(typedString, when);
+    return currentListener().keyTyped(this, typedString, when);
   }
 
   public void executeAction(String name, String... args) {
-    actionRepository.executeAction(name, args);
+    actionRepository.executeAction(this, name, args);
   }
 
   public Buffer getCurrentBuffer() {
@@ -106,9 +95,5 @@ public class Editor implements KashikiKeyListener {
         screenDevice.setFullScreenWindow(frame);
       }
     }
-  }
-
-  public void setFrame(Frame frame) {
-    this.frame = frame;
   }
 }

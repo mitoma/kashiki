@@ -11,8 +11,8 @@ public class BackspaceAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().backspace();
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().backspace();
   }
 
 }

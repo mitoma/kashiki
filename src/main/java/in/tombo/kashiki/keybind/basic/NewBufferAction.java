@@ -11,8 +11,8 @@ public class NewBufferAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().createNewBuffer();
+  public void execute(Editor editor, String... args) {
+    editor.createNewBuffer();
   }
 
 }

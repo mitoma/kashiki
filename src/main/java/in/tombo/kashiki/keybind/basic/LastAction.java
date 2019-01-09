@@ -11,8 +11,8 @@ public class LastAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().last();
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().last();
   }
 
 }

@@ -21,7 +21,7 @@ public class OpenFileAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
+  public void execute(Editor editor, String... args) {
     JFileChooser fileChooser = new JFileChooser();
     int selected = fileChooser.showOpenDialog(null);
 
@@ -29,8 +29,8 @@ public class OpenFileAction implements Action {
       try {
         String textString =
             Files.asCharSource(fileChooser.getSelectedFile(), Charsets.UTF_8).read();
-        Editor.getInstance().createNewBuffer();
-        Editor.getInstance().getCurrentBuffer().insertString(textString);
+        editor.createNewBuffer();
+        editor.getCurrentBuffer().insertString(textString);
       } catch (IOException e) {
         e.printStackTrace();
       }

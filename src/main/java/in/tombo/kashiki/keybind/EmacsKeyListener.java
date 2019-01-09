@@ -179,7 +179,7 @@ public class EmacsKeyListener implements KashikiKeyListener {
   }
 
   @Override
-  public boolean keyPressed(SupportKey supportKey, int keyCode, long when) {
+  public boolean keyPressed(Editor editor, SupportKey supportKey, int keyCode, long when) {
     this.when = when;
 
     if (keyCode == VK_SHIFT || keyCode == VK_ALT || keyCode == VK_CONTROL) {
@@ -192,7 +192,7 @@ public class EmacsKeyListener implements KashikiKeyListener {
     currentStrokes.add(stroke);
     String actionName = getActionName();
     if (actionName != null) {
-      Editor.getInstance().executeAction(actionName);
+      editor.executeAction(actionName);
       this.executed = true;
     } else {
       if (inStroke) {
@@ -236,11 +236,10 @@ public class EmacsKeyListener implements KashikiKeyListener {
   }
 
   @Override
-  public boolean keyTyped(char typedString, long when) {
+  public boolean keyTyped(Editor editor, char typedString, long when) {
     if (this.when + delta > when && executed) {
       return false;
     }
-    Editor editor = Editor.getInstance();
     editor.executeAction("type", String.valueOf(typedString));
     return false;
   }

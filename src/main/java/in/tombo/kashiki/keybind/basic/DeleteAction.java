@@ -11,8 +11,8 @@ public class DeleteAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().delete();
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().delete();
   }
 
 }

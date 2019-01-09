@@ -11,8 +11,8 @@ public class ReturnAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().insertString("\n");
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().insertString("\n");
   }
 
 }

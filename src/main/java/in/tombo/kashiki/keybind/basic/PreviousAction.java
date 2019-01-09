@@ -11,8 +11,8 @@ public class PreviousAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    Editor.getInstance().getCurrentBuffer().previous();
+  public void execute(Editor editor, String... args) {
+    editor.getCurrentBuffer().previous();
   }
 
 }

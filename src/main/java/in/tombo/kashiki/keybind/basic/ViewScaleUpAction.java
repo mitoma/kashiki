@@ -12,8 +12,8 @@ public class ViewScaleUpAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
-    SmoothValue scale = Editor.getInstance().getScale();
+  public void execute(Editor editor, String... args) {
+    SmoothValue scale = editor.getScale();
     scale.setValue(scale.getLastValue() * 1.25);
   }
 

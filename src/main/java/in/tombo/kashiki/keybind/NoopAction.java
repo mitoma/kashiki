@@ -1,5 +1,7 @@
 package in.tombo.kashiki.keybind;
 
+import in.tombo.kashiki.Editor;
+
 public class NoopAction implements Action {
 
   @Override
@@ -8,7 +10,7 @@ public class NoopAction implements Action {
   }
 
   @Override
-  public void execute(String... args) {
+  public void execute(Editor editor, String... args) {
     // noop
   }
 
