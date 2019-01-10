@@ -2,6 +2,7 @@ package in.tombo.kashiki.buffer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class CaretHandlerImpl implements CaretHandler {
 
@@ -37,7 +38,7 @@ public class CaretHandlerImpl implements CaretHandler {
   @Override
   public void last() {
     carets.forEach(c -> {
-      c.setCol(getCaretLine(c).getLength());
+      c.setCol(buffer.getCaretLine(c).getLength());
     });
   }
 
@@ -52,7 +53,7 @@ public class CaretHandlerImpl implements CaretHandler {
         }
         return;
       }
-      currentCaret.decCol(1);
+      c.decCol(1);
     });
   }
 
@@ -67,7 +68,7 @@ public class CaretHandlerImpl implements CaretHandler {
         }
         return;
       }
-      currentCaret.incCol(1);
+      c.incCol(1);
     });
   }
 
@@ -77,8 +78,8 @@ public class CaretHandlerImpl implements CaretHandler {
       if (buffer.isBufferHead(c)) {
         return;
       }
-      currentCaret.decRow(1);
-      if (currentCaret.getCol() > getCaretLine(c).getLength()) {
+      c.decRow(1);
+      if (c.getCol() > buffer.getCaretLine(c).getLength()) {
         last();
       }
     });
@@ -90,8 +91,8 @@ public class CaretHandlerImpl implements CaretHandler {
       if (buffer.isBufferLast(c)) {
         return;
       }
-      currentCaret.incRow(1);
-      if (currentCaret.getCol() > getCaretLine(c).getLength()) {
+      c.incRow(1);
+      if (c.getCol() > buffer.getCaretLine(c).getLength()) {
         last();
       }
     });
@@ -100,20 +101,30 @@ public class CaretHandlerImpl implements CaretHandler {
   @Override
   public void bufferHead() {
     carets.forEach(c -> {
-      currentCaret.setRow(0);
-      currentCaret.setCol(0);
+      c.setRow(0);
+      c.setCol(0);
     });
   }
 
   @Override
   public void bufferLast() {
     carets.forEach(c -> {
-      currentCaret.setRow(buffer.getLines().size() - 1);
-      currentCaret.setCol(getCaretLine(c).getLength());
+      c.setRow(buffer.getLines().size() - 1);
+      c.setCol(buffer.getCaretLine(c).getLength());
     });
   }
 
-  private BufferLine getCaretLine(Caret c) {
-    return buffer.getLines().get(c.getRow());
+  @Override
+  public void forEach(Consumer<Caret> consumer) {
+    carets.sort((l, r) -> r.compareTo(l));
+    for (Caret caret : carets) {
+      consumer.accept(caret);
+    }
   }
+
+  @Override
+  public Caret currentCaret() {
+    return currentCaret;
+  }
+
 }

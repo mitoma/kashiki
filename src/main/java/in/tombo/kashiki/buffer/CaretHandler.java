@@ -1,10 +1,8 @@
 package in.tombo.kashiki.buffer;
 
+import java.util.function.Consumer;
+
 public interface CaretHandler {
-
-  public void addCaret();
-
-  public void clearCaret();
 
   public void head();
 
@@ -21,4 +19,12 @@ public interface CaretHandler {
   public void bufferHead();
 
   public void bufferLast();
+
+  public void addCaret();
+
+  public void clearCaret();
+
+  public Caret currentCaret();
+
+  public void forEach(Consumer<Caret> consumer);
 }

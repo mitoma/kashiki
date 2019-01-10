@@ -18,7 +18,7 @@ public class KillRingAction implements Action {
   @Override
   public void execute(Editor editor, String... args) {
     Buffer currentBuffer = editor.getCurrentBuffer();
-    if (currentBuffer.isLineLast()) {
+    if (currentBuffer.isLineLast(currentBuffer.getCaret())) {
       currentBuffer.delete();
     } else {
       currentBuffer.mark();

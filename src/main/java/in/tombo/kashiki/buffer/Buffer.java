@@ -9,7 +9,7 @@ public class Buffer {
 
   private String bufferName;
 
-  private Caret currentCaret = new Caret(0, 0);
+  private CaretHandler caretHandler = new CaretHandlerImpl(this);
   private Caret mark = new Caret(0, 0);
   private LinkedList<BufferLine> lines = new LinkedList<BufferLine>();
   private BufferObserver observer = new BufferObserver();
@@ -36,7 +36,7 @@ public class Buffer {
       lines.get(i).updatePosition(i);
     }
     observer.update(this);
-    observer.updateCaret(currentCaret);
+    caretHandler.forEach(c -> observer.updateCaret(c));
   }
 
   public void insertString(String string) {
@@ -54,26 +54,34 @@ public class Buffer {
     }
   }
 
-  public void insertChar(String c) {
-    currentLine().insertChar(currentCaret.getCol(), c);
-    currentCaret.incCol(1);
-    observer.updateCaret(currentCaret);
+  public void insertChar(String charStr) {
+    caretHandler.forEach(c -> {
+      getCaretLine(c).insertChar(c.getCol(), charStr);
+      c.incCol(1);
+      observer.updateCaret(c);
+    });
+  }
+
+  public BufferLine getCaretLine(Caret caret) {
+    return lines.get(caret.getRow());
   }
 
   public void insertEnter() {
-    BufferLine currentLine = currentLine();
-    BufferLine nextLine = new BufferLine();
-    List<BufferChar> leaveChars = currentLine.insertEnter(currentCaret.getCol());
-    lines.add(currentCaret.getRow() + 1, nextLine);
-    update();
-    observer.addLine(nextLine);
-    leaveChars.stream().forEach(c -> {
-      nextLine.getChars().add(c);
-      observer.moveChar(currentLine, nextLine, c);
+    caretHandler.forEach(c -> {
+      BufferLine currentLine = getCaretLine(c);
+      BufferLine nextLine = new BufferLine();
+      List<BufferChar> leaveChars = currentLine.insertEnter(c.getCol());
+      lines.add(c.getRow() + 1, nextLine);
+      update();
+      observer.addLine(nextLine);
+      leaveChars.stream().forEach(bufferChar -> {
+        nextLine.getChars().add(bufferChar);
+        observer.moveChar(currentLine, nextLine, bufferChar);
+      });
+      c.setCol(0);
+      c.incRow(1);
+      observer.updateCaret(c);
     });
-    currentCaret.setCol(0);
-    currentCaret.incRow(1);
-    observer.updateCaret(currentCaret);
   }
 
   public int getMaxColNum() {
@@ -85,22 +93,19 @@ public class Buffer {
     return lines;
   }
 
-  public BufferLine currentLine() {
-    return lines.get(currentCaret.getRow());
-  }
 
   public BufferLine preLine() {
-    if (currentCaret.getRow() == 0) {
+    if (caretHandler.currentCaret().getRow() == 0) {
       return null;
     }
-    return lines.get(currentCaret.getRow() - 1);
+    return lines.get(caretHandler.currentCaret().getRow() - 1);
   }
 
   public BufferLine postLine() {
-    if (currentCaret.getRow() == lines.size() - 1) {
+    if (caretHandler.currentCaret().getRow() == lines.size() - 1) {
       return null;
     }
-    return lines.get(currentCaret.getRow() - 1);
+    return lines.get(caretHandler.currentCaret().getRow() - 1);
   }
 
   public String toBufferString() {
@@ -111,120 +116,81 @@ public class Buffer {
   public String toString() {
     StringBuilder buf = new StringBuilder();
     buf.append(toBufferString());
-    buf.append(String.format("Caret:[%d,%d]", currentCaret.getCol(), currentCaret.getRow()));
+    caretHandler.forEach(c -> {
+      buf.append(String.format("Caret:[%d,%d]", c.getCol(), c.getRow()));
+    });
     return buf.toString();
   }
 
   public Caret getCaret() {
-    return currentCaret;
+    return caretHandler.currentCaret();
   }
 
   public void backspace() {
-    if (isBufferHead() && isLineHead()) {
-      return;
-    }
-    back();
-    delete();
+    caretHandler.forEach(c -> {
+      if (isBufferHead(c) && isLineHead(c)) {
+        return;
+      }
+      back();
+      delete();
+    });
   }
 
   public void delete() {
-    if (isBufferLast() && isLineLast()) {
-      return;
-    } else if (!isLineLast()) {
-      currentLine().removeChar(currentCaret.getCol());
-    } else if (isLineLast() && !isBufferLast()) {
-      BufferLine currentLine = currentLine();
-      BufferLine removedLine = lines.remove(currentCaret.getRow() + 1);
-      currentLine.join(removedLine);
-      removedLine.getChars().stream().forEach(c -> observer.moveChar(removedLine, currentLine, c));
-      observer.removeLine(removedLine);
-    }
+    caretHandler.forEach(c -> {
+      if (isBufferLast(c) && isLineLast(c)) {
+        return;
+      } else if (!isLineLast(c)) {
+        getCaretLine(c).removeChar(c.getCol());
+      } else if (isLineLast(c) && !isBufferLast(c)) {
+        BufferLine currentLine = getCaretLine(c);
+        BufferLine removedLine = lines.remove(c.getRow() + 1);
+        currentLine.join(removedLine);
+        removedLine.getChars().stream()
+            .forEach(bufferChar -> observer.moveChar(removedLine, currentLine, bufferChar));
+        observer.removeLine(removedLine);
+      }
+    });
   }
 
   public void head() {
-    currentCaret.setCol(0);
-    observer.updateCaret(currentCaret);
+    caretHandler.head();
+    caretHandler.forEach(observer::updateCaret);
   }
 
   public void last() {
-    currentCaret.setCol(currentLine().getLength());
-    observer.updateCaret(currentCaret);
+    caretHandler.last();
+    caretHandler.forEach(observer::updateCaret);
   }
 
   public void back() {
-    if (isLineHead()) {
-      boolean isDocHead = isBufferHead();
-      previous();
-      if (!isDocHead) {
-        last();
-      }
-      return;
-    }
-    currentCaret.decCol(1);
-    observer.updateCaret(currentCaret);
+    caretHandler.back();
+    caretHandler.forEach(observer::updateCaret);
   }
 
   public void forward() {
-    if (isLineLast()) {
-      boolean isDocLast = isBufferLast();
-      next();
-      if (!isDocLast) {
-        head();
-      }
-      return;
-    }
-    currentCaret.incCol(1);
-    observer.updateCaret(currentCaret);
+    caretHandler.forward();
+    caretHandler.forEach(observer::updateCaret);
   }
 
   public void previous() {
-    if (isBufferHead()) {
-      return;
-    }
-    currentCaret.decRow(1);
-    if (currentCaret.getCol() > currentLine().getLength()) {
-      last();
-    }
-    observer.updateCaret(currentCaret);
+    caretHandler.previous();
+    caretHandler.forEach(observer::updateCaret);
   }
 
   public void next() {
-    if (isBufferLast()) {
-      return;
-    }
-    currentCaret.incRow(1);
-    if (currentCaret.getCol() > currentLine().getLength()) {
-      last();
-    }
-    observer.updateCaret(currentCaret);
+    caretHandler.next();
+    caretHandler.forEach(observer::updateCaret);
   }
 
   public void bufferHead() {
-    currentCaret.setRow(0);
-    currentCaret.setCol(0);
-    observer.updateCaret(currentCaret);
+    caretHandler.bufferHead();
+    caretHandler.forEach(observer::updateCaret);
   }
 
   public void bufferLast() {
-    currentCaret.setRow(lines.size() - 1);
-    currentCaret.setCol(currentLine().getLength());
-    observer.updateCaret(currentCaret);
-  }
-
-  public boolean isBufferHead() {
-    return isBufferHead(currentCaret);
-  }
-
-  public boolean isLineHead() {
-    return isLineHead(currentCaret);
-  }
-
-  public boolean isBufferLast() {
-    return isBufferLast(currentCaret);
-  }
-
-  public boolean isLineLast() {
-    return isLineLast(currentCaret);
+    caretHandler.bufferLast();
+    caretHandler.forEach(observer::updateCaret);
   }
 
   public boolean isBufferHead(Caret caret) {
@@ -248,20 +214,20 @@ public class Buffer {
   }
 
   public void mark() {
-    mark.setCol(currentCaret.getCol());
-    mark.setRow(currentCaret.getRow());
+    mark.setCol(caretHandler.currentCaret().getCol());
+    mark.setRow(caretHandler.currentCaret().getRow());
   }
 
   public String copy() {
     StringBuilder buf = new StringBuilder();
-    if (mark.compareTo(currentCaret) == 0) {
+    if (mark.compareTo(caretHandler.currentCaret()) == 0) {
       return buf.toString();
     }
 
     Caret head = mark;
-    Caret tail = currentCaret;
-    if (mark.compareTo(currentCaret) > 0) {
-      head = currentCaret;
+    Caret tail = caretHandler.currentCaret();
+    if (mark.compareTo(caretHandler.currentCaret()) > 0) {
+      head = caretHandler.currentCaret();
       tail = mark;
     }
 
@@ -282,13 +248,16 @@ public class Buffer {
   }
 
   public void cut() {
+    Caret currentCaret = caretHandler.currentCaret();
     if (mark.compareTo(currentCaret) == 0) {
       return;
     }
     if (mark.compareTo(currentCaret) > 0) {
-      Caret tmp = mark;
-      mark = currentCaret;
-      currentCaret = tmp;
+      Caret tmp = new Caret(mark.getRow(), mark.getCol());
+      mark.setRow(currentCaret.getRow());
+      mark.setCol(currentCaret.getCol());
+      currentCaret.setRow(tmp.getRow());
+      currentCaret.setCol(tmp.getCol());
     }
     while (mark.compareTo(currentCaret) != 0) {
       backspace();

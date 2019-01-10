@@ -91,10 +91,10 @@ public class BufferView extends Base implements BufferListener {
     List<CharView> cvl = lv.getChars();
 
     double x;
-    if (document.isLineHead()) {
+    if (document.isLineHead(document.getCaret())) {
       x = lv.getChars().stream().mapToDouble(cv -> cv.getWidth() / 2).findFirst()
           .orElse(caret.getWidth() / 2);
-    } else if (document.isLineLast()) {
+    } else if (document.isLineLast(document.getCaret())) {
       x = lv.getWidth() + (caret.getWidth() / 2);
     } else {
       x = cvl.get(c.getCol()).getPosition().getX().getLastValue();
