@@ -212,19 +212,35 @@ public class Buffer {
   }
 
   public boolean isBufferHead() {
-    return currentCaret.getRow() == 0;
+    return isBufferHead(currentCaret);
   }
 
   public boolean isLineHead() {
-    return currentCaret.getCol() == 0;
+    return isLineHead(currentCaret);
   }
 
   public boolean isBufferLast() {
-    return currentCaret.getRow() == lines.size() - 1;
+    return isBufferLast(currentCaret);
   }
 
   public boolean isLineLast() {
-    return currentCaret.getCol() == currentLine().getLength();
+    return isLineLast(currentCaret);
+  }
+
+  public boolean isBufferHead(Caret caret) {
+    return caret.getRow() == 0;
+  }
+
+  public boolean isLineHead(Caret caret) {
+    return caret.getCol() == 0;
+  }
+
+  public boolean isBufferLast(Caret caret) {
+    return caret.getRow() == lines.size() - 1;
+  }
+
+  public boolean isLineLast(Caret caret) {
+    return caret.getCol() == lines.get(caret.getRow()).getLength();
   }
 
   public void save() {
