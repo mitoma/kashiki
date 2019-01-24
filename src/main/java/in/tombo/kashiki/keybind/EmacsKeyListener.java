@@ -120,9 +120,11 @@ public class EmacsKeyListener implements KashikiKeyListener {
     CODE_MAPPING.put("f12", VK_F12);
   }
 
+  private final Editor editor;
   private final ActionRepository actionRepository;
 
-  public EmacsKeyListener(ActionRepository actionRepository) {
+  public EmacsKeyListener(Editor editor, ActionRepository actionRepository) {
+    this.editor = editor;
     this.actionRepository = actionRepository;
     try {
       setup();
@@ -183,7 +185,7 @@ public class EmacsKeyListener implements KashikiKeyListener {
   }
 
   @Override
-  public void keyPressed(Editor editor, SupportKey supportKey, int keyCode, long when) {
+  public void keyPressed(SupportKey supportKey, int keyCode, long when) {
     this.when = when;
 
     if (keyCode == VK_SHIFT || keyCode == VK_ALT || keyCode == VK_CONTROL) {
@@ -242,7 +244,7 @@ public class EmacsKeyListener implements KashikiKeyListener {
   }
 
   @Override
-  public void keyTyped(Editor editor, char typedString, long when) {
+  public void keyTyped(char typedString, long when) {
     if (this.when + delta > when && executed) {
       return;
     }

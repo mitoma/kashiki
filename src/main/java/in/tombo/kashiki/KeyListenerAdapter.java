@@ -1,6 +1,8 @@
 package in.tombo.kashiki;
 
 import static in.tombo.kashiki.keybind.SupportKey.*;
+
+import in.tombo.kashiki.keybind.KashikiKeyListener;
 import in.tombo.kashiki.keybind.SupportKey;
 
 import java.awt.event.KeyEvent;
@@ -8,12 +10,12 @@ import java.awt.event.KeyListener;
 
 import javax.swing.SwingUtilities;
 
-public class DocumentKeyListener implements KeyListener {
+public class KeyListenerAdapter implements KeyListener {
 
-  private final Editor editor;
+  private final KashikiKeyListener keyListener;
 
-  public DocumentKeyListener(Editor editor) {
-    this.editor = editor;
+  public KeyListenerAdapter(KashikiKeyListener keyListener) {
+    this.keyListener = keyListener;
   }
 
   @Override
@@ -36,12 +38,12 @@ public class DocumentKeyListener implements KeyListener {
     } else {
       key = NONE;
     }
-    SwingUtilities.invokeLater(() -> editor.keyPressed(key, e.getKeyCode(), e.getWhen()));
+    SwingUtilities.invokeLater(() -> keyListener.keyPressed(key, e.getKeyCode(), e.getWhen()));
   }
 
   @Override
   public void keyTyped(KeyEvent e) {
-    SwingUtilities.invokeLater(() -> editor.keyTyped(e.getKeyChar(), e.getWhen()));
+    SwingUtilities.invokeLater(() -> keyListener.keyTyped(e.getKeyChar(), e.getWhen()));
   }
 
   @Override
