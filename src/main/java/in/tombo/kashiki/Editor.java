@@ -43,12 +43,12 @@ public class Editor {
     return keyListener;
   }
 
-  public boolean keyPressed(SupportKey supportKey, int keyCode, long when) {
-    return currentListener().keyPressed(this, supportKey, keyCode, when);
+  public void keyPressed(SupportKey supportKey, int keyCode, long when) {
+    currentListener().keyPressed(this, supportKey, keyCode, when);
   }
 
-  public boolean keyTyped(char typedString, long when) {
-    return currentListener().keyTyped(this, typedString, when);
+  public void keyTyped(char typedString, long when) {
+    currentListener().keyTyped(this, typedString, when);
   }
 
   public void executeAction(String name, String... args) {

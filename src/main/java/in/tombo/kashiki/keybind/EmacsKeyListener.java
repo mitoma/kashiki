@@ -2,7 +2,6 @@ package in.tombo.kashiki.keybind;
 
 import static in.tombo.kashiki.keybind.SupportKey.*;
 import static java.awt.event.KeyEvent.*;
-import in.tombo.kashiki.Editor;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +16,8 @@ import java.util.regex.Pattern;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
+
+import in.tombo.kashiki.Editor;
 
 public class EmacsKeyListener implements KashikiKeyListener {
   private static Pattern ACTION_PATTERN = Pattern.compile("-?([^\\-]+)\\z");
@@ -179,12 +180,12 @@ public class EmacsKeyListener implements KashikiKeyListener {
   }
 
   @Override
-  public boolean keyPressed(Editor editor, SupportKey supportKey, int keyCode, long when) {
+  public void keyPressed(Editor editor, SupportKey supportKey, int keyCode, long when) {
     this.when = when;
 
     if (keyCode == VK_SHIFT || keyCode == VK_ALT || keyCode == VK_CONTROL) {
       this.executed = true;
-      return true;
+      return;
     }
 
     Stroke stroke = new Stroke(supportKey, keyCode);
@@ -201,7 +202,6 @@ public class EmacsKeyListener implements KashikiKeyListener {
         this.executed = false;
       }
     }
-    return executed;
   }
 
   private String getActionName() {
@@ -236,11 +236,10 @@ public class EmacsKeyListener implements KashikiKeyListener {
   }
 
   @Override
-  public boolean keyTyped(Editor editor, char typedString, long when) {
+  public void keyTyped(Editor editor, char typedString, long when) {
     if (this.when + delta > when && executed) {
-      return false;
+      return;
     }
     editor.executeAction("type", String.valueOf(typedString));
-    return false;
   }
 }
