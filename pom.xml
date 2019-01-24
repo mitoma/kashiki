@@ -55,6 +55,7 @@
               <file>${basedir}/src/main/doc/eclipse-java-google-style.xml</file>
               <version>4.7.1</version>
             </eclipse>
+            <removeUnusedImports/>
           </java>
         </configuration>
       </plugin>
