@@ -1,6 +1,5 @@
 package in.tombo.kashiki.view;
 
-import in.tombo.kashiki.view.MovingType;
 
 import org.junit.Test;
 

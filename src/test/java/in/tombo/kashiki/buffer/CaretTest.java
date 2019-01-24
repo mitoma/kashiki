@@ -1,7 +1,6 @@
 package in.tombo.kashiki.buffer;
 
 import static org.junit.Assert.*;
-import in.tombo.kashiki.buffer.Caret;
 
 import org.junit.Test;
 

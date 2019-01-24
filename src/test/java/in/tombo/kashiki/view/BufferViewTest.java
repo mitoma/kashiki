@@ -1,7 +1,6 @@
 package in.tombo.kashiki.view;
 
 import in.tombo.kashiki.buffer.Buffer;
-import in.tombo.kashiki.view.BufferView;
 
 import org.junit.Before;
 import org.junit.Test;

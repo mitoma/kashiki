@@ -1,7 +1,5 @@
 package in.tombo.kashiki.keybind;
 
-import in.tombo.kashiki.keybind.EmacsKeyListener;
-import in.tombo.kashiki.keybind.SupportKey;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;

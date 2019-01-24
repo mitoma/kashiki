@@ -2,8 +2,6 @@ package in.tombo.kashiki.buffer;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import in.tombo.kashiki.buffer.Buffer;
-import in.tombo.kashiki.buffer.Caret;
 
 import org.junit.Before;
 import org.junit.Test;
