@@ -8,7 +8,7 @@ import java.util.List;
 
 import in.tombo.kashiki.buffer.Buffer;
 import in.tombo.kashiki.buffer.BufferRepository;
-import in.tombo.kashiki.keybind.ActionRepository;
+import in.tombo.kashiki.keybind.Action;
 import in.tombo.kashiki.keybind.KashikiKeyListener;
 import in.tombo.kashiki.keybind.SupportKey;
 import in.tombo.kashiki.view.Base;
@@ -21,13 +21,11 @@ public class Editor {
   private List<Buffer> buffers = new ArrayList<>();
   private List<Base> currentDrawables = new ArrayList<>();
 
-  private ActionRepository actionRepository;
   private KashikiKeyListener keyListener;
   private SmoothValue scale = new SmoothValue(1);
   private Frame frame;
 
-  public Editor(ActionRepository actionRepository, KashikiKeyListener keyListener, Frame frame) {
-    this.actionRepository = actionRepository;
+  public Editor(KashikiKeyListener keyListener, Frame frame) {
     this.keyListener = keyListener;
     this.frame = frame;
 
@@ -51,8 +49,8 @@ public class Editor {
     currentListener().keyTyped(this, typedString, when);
   }
 
-  public void executeAction(String name, String... args) {
-    actionRepository.executeAction(this, name, args);
+  public void executeAction(Action action, String... args) {
+    action.execute(this, args);
   }
 
   public Buffer getCurrentBuffer() {

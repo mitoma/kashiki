@@ -120,7 +120,10 @@ public class EmacsKeyListener implements KashikiKeyListener {
     CODE_MAPPING.put("f12", VK_F12);
   }
 
-  public EmacsKeyListener() {
+  private final ActionRepository actionRepository;
+
+  public EmacsKeyListener(ActionRepository actionRepository) {
+    this.actionRepository = actionRepository;
     try {
       setup();
     } catch (IOException e) {
@@ -193,7 +196,10 @@ public class EmacsKeyListener implements KashikiKeyListener {
     currentStrokes.add(stroke);
     String actionName = getActionName();
     if (actionName != null) {
-      editor.executeAction(actionName);
+      actionRepository.getAction(actionName).ifPresent(action -> {
+        editor.executeAction(action);
+      });
+
       this.executed = true;
     } else {
       if (inStroke) {
@@ -240,6 +246,8 @@ public class EmacsKeyListener implements KashikiKeyListener {
     if (this.when + delta > when && executed) {
       return;
     }
-    editor.executeAction("type", String.valueOf(typedString));
+    actionRepository.getAction("type").ifPresent((action) -> {
+      editor.executeAction(action, String.valueOf(typedString));
+    });
   }
 }

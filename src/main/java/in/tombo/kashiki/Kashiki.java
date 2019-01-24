@@ -15,7 +15,7 @@ public class Kashiki {
   public static void main(String[] args) throws IOException {
     Frame frame = new Frame("Kashiki");
 
-    Editor editor = new Editor(new ActionRepository(), new EmacsKeyListener(), frame);
+    Editor editor = new Editor(new EmacsKeyListener(new ActionRepository()), frame);
 
     frame.setIconImage(ImageIO.read(Thread.currentThread().getContextClassLoader()
         .getResourceAsStream("in/tombo/kashiki/icon.png")));
