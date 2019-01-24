@@ -1,12 +1,12 @@
 package in.tombo.kashiki.keybind.basic;
 
-import in.tombo.kashiki.Editor;
-import in.tombo.kashiki.buffer.Buffer;
-import in.tombo.kashiki.keybind.Action;
-
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+
+import in.tombo.kashiki.Editor;
+import in.tombo.kashiki.buffer.Buffer;
+import in.tombo.kashiki.keybind.Action;
 
 public class KillRingAction implements Action {
 

@@ -1,8 +1,5 @@
 package in.tombo.kashiki.keybind.basic;
 
-import in.tombo.kashiki.Editor;
-import in.tombo.kashiki.keybind.Action;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -11,6 +8,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import com.google.common.base.Charsets;
+
+import in.tombo.kashiki.Editor;
+import in.tombo.kashiki.keybind.Action;
 
 public class SaveFileAction implements Action {
 

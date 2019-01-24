@@ -18,7 +18,7 @@ public class Kashiki {
 
     ActionRepository actionRepository = new ActionRepository();
 
-    Editor editor = new Editor(frame);
+    Editor editor = new EditorImpl(frame);
 
     KashikiKeyListener kashikiKeyListener = new EmacsKeyListener(editor, actionRepository);
     KeyListenerAdapter documentKeyListener = new KeyListenerAdapter(kashikiKeyListener);
