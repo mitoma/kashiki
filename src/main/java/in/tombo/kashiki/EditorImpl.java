@@ -8,7 +8,6 @@ import java.util.List;
 
 import in.tombo.kashiki.buffer.Buffer;
 import in.tombo.kashiki.buffer.BufferRepository;
-import in.tombo.kashiki.keybind.Action;
 import in.tombo.kashiki.view.Base;
 import in.tombo.kashiki.view.BufferView;
 import in.tombo.kashiki.view.SmoothValue;
@@ -31,10 +30,6 @@ public class EditorImpl implements Editor {
 
     BufferView bufView = new BufferView(buf);
     currentDrawables.add(bufView);
-  }
-
-  public void executeAction(Action action, String... args) {
-    action.execute(this, args);
   }
 
   public Buffer getCurrentBuffer() {

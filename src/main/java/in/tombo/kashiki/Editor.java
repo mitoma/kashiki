@@ -3,7 +3,6 @@ package in.tombo.kashiki;
 import java.util.List;
 
 import in.tombo.kashiki.buffer.Buffer;
-import in.tombo.kashiki.keybind.Action;
 import in.tombo.kashiki.view.Base;
 import in.tombo.kashiki.view.SmoothValue;
 
@@ -22,7 +21,5 @@ public interface Editor {
   SmoothValue getScale();
 
   void createNewBuffer();
-
-  void executeAction(Action action, String... args);
 
 }

@@ -199,7 +199,7 @@ public class EmacsKeyListener implements KashikiKeyListener {
     String actionName = getActionName();
     if (actionName != null) {
       actionRepository.getAction(actionName).ifPresent(action -> {
-        editor.executeAction(action);
+        action.execute(editor);
       });
 
       this.executed = true;
@@ -249,7 +249,7 @@ public class EmacsKeyListener implements KashikiKeyListener {
       return;
     }
     actionRepository.getAction("type").ifPresent((action) -> {
-      editor.executeAction(action, String.valueOf(typedString));
+      action.execute(editor, String.valueOf(typedString));
     });
   }
 }
