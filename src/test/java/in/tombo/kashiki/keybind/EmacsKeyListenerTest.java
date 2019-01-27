@@ -4,14 +4,14 @@ package in.tombo.kashiki.keybind;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EmacsKeyListenerTest {
   private EmacsKeyListener listener;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     listener = new EmacsKeyListener(null, null);
   }
@@ -22,7 +22,7 @@ public class EmacsKeyListenerTest {
       listener.setup();
       System.out.println(listener.keybinds);
     } catch (IOException e) {
-      Assert.fail(e.getMessage());
+      Assertions.fail(e.getMessage());
     }
   }
 

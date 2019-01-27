@@ -1,15 +1,15 @@
 package in.tombo.kashiki.view;
 
-import in.tombo.kashiki.buffer.Buffer;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Before;
-import org.junit.Test;
+import in.tombo.kashiki.buffer.Buffer;
 
 public class BufferViewTest {
 
   Buffer buffer;
 
-  @Before
+  @BeforeEach  
   public void setup() {
     buffer = new Buffer("testBuffer", "あいうえお");
 

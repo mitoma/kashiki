@@ -4,6 +4,8 @@
     <lib.jogl.version>2.3.2</lib.jogl.version>
     <lib.guava.version>27.0.1-jre</lib.guava.version>
     <lib.jgit.version>5.2.0.201812061821-r</lib.jgit.version>
+    <lib.junit.version>5.3.2</lib.junit.version>
+    <lib.assertj.version>3.11.1</lib.assertj.version>
     <spotless.version>1.17.0</spotless.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.version>0.0.1-SNAPSHOT</project.version>
@@ -22,6 +24,10 @@
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.0</version>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
@@ -113,6 +119,7 @@
     </plugins>
   </build>
   <dependencies>
+    <!-- compile scope -->
     <dependency>
       <groupId>org.jogamp.jogl</groupId>
       <artifactId>jogl-all-main</artifactId>
@@ -133,10 +140,23 @@
       <artifactId>org.eclipse.jgit</artifactId>
       <version>${lib.jgit.version}</version>
     </dependency>
+    <!-- test  scope -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${lib.junit.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${lib.junit.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${lib.assertj.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
