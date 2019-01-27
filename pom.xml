@@ -8,12 +8,11 @@
     <lib.assertj.version>3.11.1</lib.assertj.version>
     <spotless.version>1.17.0</spotless.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.version>0.0.1-SNAPSHOT</project.version>
   </properties>
   <modelVersion>4.0.0</modelVersion>
   <groupId>in.tombo</groupId>
   <artifactId>kashiki</artifactId>
-  <version>${project.version}</version>
+  <version>0.0.1-SNAPSHOT</version>
   <build>
     <plugins>
       <plugin>
