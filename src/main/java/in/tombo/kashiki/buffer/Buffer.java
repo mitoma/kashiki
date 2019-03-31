@@ -77,7 +77,7 @@ public class Buffer {
       update();
       observer.addLine(nextLine);
       leaveChars.stream().forEach(bufferChar -> {
-        nextLine.getChars().add(bufferChar);
+        nextLine.insertLast(bufferChar);
         observer.moveChar(currentLine, nextLine, bufferChar);
       });
       c.setCol(0);
