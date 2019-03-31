@@ -1,18 +1,17 @@
 package in.tombo.kashiki.view;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+import com.jogamp.opengl.GL2;
+
 import in.tombo.kashiki.buffer.Buffer;
 import in.tombo.kashiki.buffer.BufferChar;
 import in.tombo.kashiki.buffer.BufferLine;
 import in.tombo.kashiki.buffer.BufferListener;
 import in.tombo.kashiki.buffer.Caret;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import com.jogamp.opengl.GL2;
 
 public class BufferView extends Base implements BufferListener {
 
@@ -39,7 +38,7 @@ public class BufferView extends Base implements BufferListener {
   }
 
   private void buildLines() {
-    LinkedList<BufferLine> lines = document.getLines();
+    List<BufferLine> lines = document.getLines();
     for (BufferLine bufferLine : lines) {
       addLine(bufferLine);
     }
