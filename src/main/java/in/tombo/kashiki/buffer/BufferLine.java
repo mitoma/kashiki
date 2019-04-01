@@ -1,12 +1,14 @@
 package in.tombo.kashiki.buffer;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.collect.ImmutableList;
 
 public class BufferLine implements Comparable<BufferLine> {
 
   private int rowNum;
-  private List<BufferChar> chars = new LinkedList<>();
+  private List<BufferChar> chars = new ArrayList<>();
   private BufferLineObserver observer = new BufferLineObserver();
 
   public void addListener(BufferLineListener listener) {
@@ -37,6 +39,10 @@ public class BufferLine implements Comparable<BufferLine> {
     return chars.get(position).getChar();
   }
 
+  public void insertLast(BufferChar bufferChar) {
+    chars.add(bufferChar);
+  }
+
   public void insertChar(int col, String c) {
     BufferChar bc = new BufferChar(c, rowNum, col);
     chars.add(col, bc);
@@ -45,7 +51,7 @@ public class BufferLine implements Comparable<BufferLine> {
   }
 
   public List<BufferChar> insertEnter(int col) {
-    List<BufferChar> results = new LinkedList<>();
+    List<BufferChar> results = new ArrayList<>();
     if (col == chars.size()) {
       return results;
     }
@@ -70,7 +76,7 @@ public class BufferLine implements Comparable<BufferLine> {
   }
 
   public List<BufferChar> getChars() {
-    return chars;
+    return ImmutableList.copyOf(chars);
   }
 
   public int getRowNum() {

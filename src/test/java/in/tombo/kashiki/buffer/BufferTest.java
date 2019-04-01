@@ -18,7 +18,7 @@ public class BufferTest {
   @Test
   public void initialState() {
     assertThat(buf.getLines()).hasSize(1);
-    assertThat(buf.getLines().getFirst().getLength()).isEqualTo(0);
+    assertThat(buf.getLines().get(0).getLength()).isEqualTo(0);
     assertThat(buf.getCaret()).isEqualTo(new Caret(0, 0));
     buf.forward();
     assertThat(buf.getCaret()).isEqualTo(new Caret(0, 0));

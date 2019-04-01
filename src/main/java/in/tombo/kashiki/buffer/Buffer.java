@@ -1,9 +1,11 @@
 package in.tombo.kashiki.buffer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.google.common.collect.ImmutableList;
 
 public class Buffer {
 
@@ -11,7 +13,7 @@ public class Buffer {
 
   private CaretHandler caretHandler = new CaretHandlerImpl(this);
   private Caret mark = new Caret(0, 0);
-  private LinkedList<BufferLine> lines = new LinkedList<BufferLine>();
+  private List<BufferLine> lines = new ArrayList<BufferLine>();
   private BufferObserver observer = new BufferObserver();
 
   public Buffer(String bufferName, String value) {
@@ -75,7 +77,7 @@ public class Buffer {
       update();
       observer.addLine(nextLine);
       leaveChars.stream().forEach(bufferChar -> {
-        nextLine.getChars().add(bufferChar);
+        nextLine.insertLast(bufferChar);
         observer.moveChar(currentLine, nextLine, bufferChar);
       });
       c.setCol(0);
@@ -89,10 +91,9 @@ public class Buffer {
         .orElse(new BufferLine()).getLength();
   }
 
-  public LinkedList<BufferLine> getLines() {
-    return lines;
+  public List<BufferLine> getLines() {
+    return ImmutableList.copyOf(lines);
   }
-
 
   public BufferLine preLine() {
     if (caretHandler.currentCaret().getRow() == 0) {

@@ -9,7 +9,7 @@ public class BufferViewTest {
 
   Buffer buffer;
 
-  @BeforeEach  
+  @BeforeEach
   public void setup() {
     buffer = new Buffer("testBuffer", "あいうえお");
 
