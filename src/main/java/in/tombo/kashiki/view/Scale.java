@@ -3,32 +3,26 @@ package in.tombo.kashiki.view;
 import com.jogamp.opengl.GL2;
 
 public class Scale {
-  private SmoothValue x = new SmoothValue(1);
-  private SmoothValue y = new SmoothValue(1);
-  private SmoothValue z = new SmoothValue(1);
+  private final SmoothValue x;
+  private final SmoothValue y;
+  private final SmoothValue z;
+
+  public Scale(double x, double y, double z) {
+    this.x = new SmoothValue(1);
+    this.y = new SmoothValue(1);
+    this.z = new SmoothValue(1);
+  }
 
   public SmoothValue getX() {
     return x;
-  }
-
-  public void setX(SmoothValue x) {
-    this.x = x;
   }
 
   public SmoothValue getY() {
     return y;
   }
 
-  public void setY(SmoothValue y) {
-    this.y = y;
-  }
-
   public SmoothValue getZ() {
     return z;
-  }
-
-  public void setZ(SmoothValue z) {
-    this.z = z;
   }
 
   public boolean isAnimated() {
