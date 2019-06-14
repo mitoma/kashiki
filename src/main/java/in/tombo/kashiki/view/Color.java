@@ -3,41 +3,32 @@ package in.tombo.kashiki.view;
 import com.jogamp.opengl.GL2;
 
 public class Color {
-  private SmoothValue red = new SmoothValue(1);
-  private SmoothValue green = new SmoothValue(1);
-  private SmoothValue blue = new SmoothValue(1);
-  private SmoothValue alpha = new SmoothValue(1);
+  private final SmoothValue red;
+  private final SmoothValue green;
+  private final SmoothValue blue;
+  private final SmoothValue alpha;
+
+  public Color(double red, double blue, double green, double alpha) {
+    this.red = new SmoothValue(red);
+    this.green = new SmoothValue(blue);
+    this.blue = new SmoothValue(green);
+    this.alpha = new SmoothValue(alpha);
+  }
 
   public SmoothValue getRed() {
     return red;
-  }
-
-  public void setRed(SmoothValue red) {
-    this.red = red;
   }
 
   public SmoothValue getGreen() {
     return green;
   }
 
-  public void setGreen(SmoothValue green) {
-    this.green = green;
-  }
-
   public SmoothValue getBlue() {
     return blue;
   }
 
-  public void setBlue(SmoothValue blue) {
-    this.blue = blue;
-  }
-
   public SmoothValue getAlpha() {
     return alpha;
-  }
-
-  public void setAlpha(SmoothValue alpha) {
-    this.alpha = alpha;
   }
 
   public boolean isAnimated() {

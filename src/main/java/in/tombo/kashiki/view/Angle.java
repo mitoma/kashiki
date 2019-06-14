@@ -3,32 +3,26 @@ package in.tombo.kashiki.view;
 import com.jogamp.opengl.GL2;
 
 public class Angle {
-  private SmoothValue x = new SmoothValue(0);
-  private SmoothValue y = new SmoothValue(0);
-  private SmoothValue z = new SmoothValue(0);
+  private final SmoothValue x;
+  private final SmoothValue y;
+  private final SmoothValue z;
+
+  public Angle(double x, double y, double z) {
+    this.x = new SmoothValue(x);
+    this.y = new SmoothValue(y);
+    this.z = new SmoothValue(z);
+  }
 
   public SmoothValue getX() {
     return x;
-  }
-
-  public void setX(SmoothValue x) {
-    this.x = x;
   }
 
   public SmoothValue getY() {
     return y;
   }
 
-  public void setY(SmoothValue y) {
-    this.y = y;
-  }
-
   public SmoothValue getZ() {
     return z;
-  }
-
-  public void setZ(SmoothValue z) {
-    this.z = z;
   }
 
   public boolean isAnimated() {

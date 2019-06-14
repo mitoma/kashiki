@@ -20,7 +20,7 @@ public class KeyListenerAdapter implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
-    SupportKey key;
+    final SupportKey key;
     if (e.isControlDown() && e.isAltDown() && e.isShiftDown()) {
       key = CTRL_ALT_SHIFT;
     } else if (e.isControlDown() && e.isAltDown()) {
