@@ -75,7 +75,7 @@ public enum MovingType {
     }
   };
 
-  private final LoadingCache<Integer, double[]> cache =
+  LoadingCache<Integer, double[]> cache =
       CacheBuilder.newBuilder().maximumSize(1000).build(new CacheLoader<Integer, double[]>() {
         @Override
         public double[] load(Integer divOfNum) throws Exception {

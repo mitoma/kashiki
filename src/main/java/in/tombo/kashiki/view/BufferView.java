@@ -68,8 +68,7 @@ public class BufferView extends Base implements BufferListener {
 
     Position position = getPosition();
     Position cPos = caret.getPosition();
-    // position.update(-cPos.getX().getValue(false), -cPos.getY().getValue(false), 0);
-    position.update(-w / 2, -cPos.getY().getValue(false), 0);
+    position.update(-cPos.getX().getValue(false), -cPos.getY().getValue(false), 0);
 
     width.setValue(w);
     height.setValue(-h);

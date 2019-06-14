@@ -6,9 +6,9 @@ import com.jogamp.opengl.GL2;
 public abstract class Base {
 
   private Position position = new Position();
-  private Angle angle = new Angle(0, 0, 0);
-  private Scale scale = new Scale(1, 1, 1);
-  private Color color = new Color(1, 1, 1, 1);
+  private Angle angle = new Angle();
+  private Scale scale = new Scale();
+  private Color color = new Color();
 
   public void draw(GL2 gl) {
     preDraw(gl);

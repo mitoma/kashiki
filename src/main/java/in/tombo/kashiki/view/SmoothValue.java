@@ -104,7 +104,7 @@ public class SmoothValue {
   }
 
   public boolean isAnimated() {
-    return queue.isEmpty();
+    return currentValue == value;
   }
 
   public double getLastValue() {

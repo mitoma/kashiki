@@ -48,13 +48,13 @@ public class TextureProvider {
     return INSTANCE;
   }
 
-  private final Font font;
+  private Font font;
 
   private TextureProvider() {
     try {
       font = Font
           .createFont(Font.PLAIN,
-              this.getClass().getClassLoader().getResourceAsStream("TakaoGothic.ttf"))
+              this.getClass().getClassLoader().getResourceAsStream("TakaoMincho.ttf"))
           .deriveFont((float) FONT_SIZE);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
