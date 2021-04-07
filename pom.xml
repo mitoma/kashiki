@@ -6,7 +6,7 @@
     <lib.jgit.version>5.2.0.201812061821-r</lib.jgit.version>
     <lib.junit.version>5.3.2</lib.junit.version>
     <lib.assertj.version>3.11.1</lib.assertj.version>
-    <spotless.version>1.17.0</spotless.version>
+    <spotless.version>1.31.3</spotless.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <modelVersion>4.0.0</modelVersion>
