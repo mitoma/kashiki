@@ -3,7 +3,7 @@
   <properties>
     <lib.jogl.version>2.3.2</lib.jogl.version>
     <lib.guava.version>30.1.1-jre</lib.guava.version>
-    <lib.jgit.version>5.2.0.201812061821-r</lib.jgit.version>
+    <lib.jgit.version>5.11.0.202103091610-r</lib.jgit.version>
     <lib.junit.version>5.7.1</lib.junit.version>
     <lib.assertj.version>3.19.0</lib.assertj.version>
     <spotless.version>1.31.3</spotless.version>
